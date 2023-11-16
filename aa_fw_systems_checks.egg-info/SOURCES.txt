@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+setup.cfg
+aa_fw_systems_checks.egg-info/PKG-INFO
+aa_fw_systems_checks.egg-info/SOURCES.txt
+aa_fw_systems_checks.egg-info/dependency_links.txt
+aa_fw_systems_checks.egg-info/requires.txt
+aa_fw_systems_checks.egg-info/top_level.txt
+fwsystems/__init__.py
+fwsystems/admin.py
+fwsystems/app-settings.py
+fwsystems/apps.py
+fwsystems/models.py
+fwsystems/providers.py
+fwsystems/tasks.py
