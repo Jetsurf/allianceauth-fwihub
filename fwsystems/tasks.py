@@ -8,6 +8,7 @@ from allianceauth.services.hooks import get_extension_logger
 
 from fwsystems.models import System, SystemContest, Webhook
 from fwsystems.providers import get_warzone
+from fwsystems.task_helpers import create_contest_embed
 
 logger = get_extension_logger(__name__)
 
@@ -15,6 +16,8 @@ logger = get_extension_logger(__name__)
 def update_fw_esi():
 	systems = System.objects.all()
 	data = get_warzone()
+	highContest = []
+
 	for system in systems:
 		entry = next((item for item in data if item['solarsystemID'] == system.system.id))
 
@@ -31,4 +34,15 @@ def update_fw_esi():
            	AdvantageTerrainAmount2 = entry['advantage'][1]['terrainAmount'] if len(entry['advantage']) > 1 else 0,
            	AdvantageDynamicAmount2 = entry['advantage'][1]['dynamicAmount'] if len(entry['advantage']) > 1 else 0
 		)
+
 		sys_entry.save()
+
+		if entry['contestedAmount'] * 100 > 80:
+			highContest.append(sys_entry)
+
+	if len(highContest) > 0:
+		hook = Webhook.objects.all()[0]
+		if hook.enabled:
+			hook.send_embed(create_contest_embed(highContest))
+		
+		

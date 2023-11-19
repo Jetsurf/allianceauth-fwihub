@@ -79,7 +79,7 @@ class Webhook(models.Model):
         return self.Name
 
     def send_embed(self, embed):
-        webhook=SyncWebhook.from_url(self.url)
+        webhook=SyncWebhook.from_url(self.URL)
         webhook.send(embed=embed, username="FW System iHub Check")
 
     def save(self, *args, **kwargs):

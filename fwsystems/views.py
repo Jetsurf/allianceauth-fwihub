@@ -25,13 +25,13 @@ def systemviewer(request) -> HttpResponse:
 
 	if system_id != None:
 		contest_entries = SystemContest.objects.filter(system_id=system_id)
+		time_data = []
 		contest_data = []
 		advantage_data = []
 		title = system.name
 
 		for entry in contest_entries:
-			contest_data.append({ "x" : int(entry.created.timestamp())*1000, "y" : entry.ContestedAmount})
-		#	{ "x": 1646073000000, "y": 15.00 },
+			contest_data.append(round(entry.ContestedAmount * 100, 2))
 			advantage_data.append({"x" : int(entry.created.timestamp())*1000, "y" : entry.AdvantageTerrainAmount1})
 
 		render_items = {

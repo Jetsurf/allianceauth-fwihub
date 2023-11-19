@@ -8,11 +8,12 @@ aa_fw_systems_checks.egg-info/requires.txt
 aa_fw_systems_checks.egg-info/top_level.txt
 fwsystems/__init__.py
 fwsystems/admin.py
-fwsystems/app-settings.py
+fwsystems/app_settings.py
 fwsystems/apps.py
 fwsystems/auth_hooks.py
 fwsystems/models.py
 fwsystems/providers.py
+fwsystems/task_helpers.py
 fwsystems/tasks.py
 fwsystems/urls.py
 fwsystems/views.py

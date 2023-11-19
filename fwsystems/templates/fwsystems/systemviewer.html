@@ -40,6 +40,11 @@
 						},
 						toolTip: {
 							shared: true
+						},
+						scales: {
+							xAxes: {
+								type: 'time'
+							}
 						}
 					},
 
@@ -47,18 +52,20 @@
 						datasets: [{
 							steppedLine: true,
 							xValueType: "dateTime",
+							xValueFormatString: "MMM-DD",
 							label: "Contest Amount",
 							lineThickness: 1,
 							borderColor: "red",
-							data: {{contestAmount|safe}}
+							data: {{contestAmount|safe}},
 						},{
 							steppedLine: true,
 							xValueType: "dateTime",
+							xValueFormatString: "MMM-DD",
 							label: "Advantage Amount",
 							axisYType: "secondary",
 							lineThickness: 1,
 							borderColor: "blue",
-							data: {{advantageAmount|safe}}
+							data: {{advantageAmount|safe}},
 						}]
 					}
 				});
