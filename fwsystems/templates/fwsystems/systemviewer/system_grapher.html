@@ -1,0 +1,49 @@
+<!-- index.html -->
+{% load static %} 
+<html>
+<head>
+<script>
+window.onload = function () {
+  var chart= new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    theme: "light2",
+    title:{
+      text: title
+    },
+    axisX: {
+      valueFormatString: "DD MMM HH:mm"
+    },
+    axisY: {
+    	lineThickness: 1
+    },
+    axisY2: {
+      minimum:25,
+      lineThickness: 1
+    },
+    toolTip: {
+      shared: true
+    },
+    data: [{
+      type: "stepLine",
+      connectNullData: true,
+      xValueFormatString: "DD HH:mm",
+      xValueType: "dateTime",
+      dataPoints: {{ contestAmount|safe }}
+    },{
+      type: "stepLine",  
+      axisYType: "secondary",
+      connectNullData: true,
+      xValueFormatString: "DD HH:mm",
+      xValueType: "dateTime",
+      dataPoints: {{ advantageAmount|safe }}
+    }]
+  });
+  chart.render();
+}
+</script>    
+</head>
+<body>
+    <div id="chartContainer" style="width: 100%; height: 360px;"></div>
+    <script src="{% static 'canvasjs.min.js' %}"></script>
+</body>
+</html>  

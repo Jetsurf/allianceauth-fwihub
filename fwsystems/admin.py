@@ -17,3 +17,7 @@ class SystemConfigAdmin(admin.ModelAdmin):
             kwargs['queryset'] = System.objects.all()
 
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+@admin.register(Webhook)
+class WebhookAdmin(admin.ModelAdmin):
+    list_display = ("Name", )

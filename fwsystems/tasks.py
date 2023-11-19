@@ -18,7 +18,8 @@ def update_fw_esi():
 	for system in systems:
 		entry = next((item for item in data if item['solarsystemID'] == system.system.id))
 
-		sys_entry = SystemContest(System=system,
+		sys_entry = SystemContest(
+			system_id=entry['solarsystemID'],
 			OwnerFactionID = EveFaction.objects.update_or_create_esi(id=entry['ownerFaction'])[0],
 			OccupierFactionID = EveFaction.objects.update_or_create_esi(id=entry['occupierFaction'])[0],
 			ContestedStatus = entry['contestedStatus'],

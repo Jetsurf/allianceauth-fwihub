@@ -1,0 +1,11 @@
+<li class="dropdown">
+    <form action="{% url 'fwsystems:systemviewer' %}" method="get" id="system_selector" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+        <select onchange="this.form.submit()" class="form-control" id="system_selector" name="system_id">
+            {% for each_system in systems %}
+                <option value={{ each_system.system.id }} {% if system.id == each_system.system.id %} selected {% endif %}>
+                {{ each_system.system.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</li>

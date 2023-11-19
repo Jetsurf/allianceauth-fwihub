@@ -10,6 +10,9 @@ fwsystems/__init__.py
 fwsystems/admin.py
 fwsystems/app-settings.py
 fwsystems/apps.py
+fwsystems/auth_hooks.py
 fwsystems/models.py
 fwsystems/providers.py
 fwsystems/tasks.py
+fwsystems/urls.py
+fwsystems/views.py

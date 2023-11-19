@@ -1,5 +1,7 @@
 [build-system]
 requires = [
+    "django-eveuniverse",
+    "django-chartjs",
     "setuptools>=42",
     "wheel"
 ]
