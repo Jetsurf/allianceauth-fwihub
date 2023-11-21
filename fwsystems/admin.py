@@ -2,7 +2,7 @@ from django.contrib import admin
 from allianceauth.services.hooks import get_extension_logger
 from eveuniverse.models import EveFaction, EveRegion, EveSolarSystem
 
-from fwsystems.models import Faction, System, Webhook
+from fwsystems.models import System, Webhook
 
 #from .admin_helpers import list_2_html_w_tooltips
 

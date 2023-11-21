@@ -7,7 +7,7 @@ from django.db.models import F, Q, Sum
 from eveuniverse.models import EveFaction, EveSolarSystem
 from allianceauth.services.hooks import get_extension_logger
 
-from fwsystems.models import Faction, System, SystemContest, Webhook
+from fwsystems.models import System, SystemContest, Webhook
 from fwsystems.providers import get_warzone
 from fwsystems.task_helpers import create_contest_embed
 
