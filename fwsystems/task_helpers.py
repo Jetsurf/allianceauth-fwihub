@@ -16,6 +16,11 @@ def create_contest_embed(systems: list):
 	embed.title = f"Systems - Close to Vulnerable"
 	embed.colour = FWSYSTEMS_WARNING_COLOR
 	for sys in systems:
-		embed.add_field(name=f"{sys.system.name}", value=f"{str(round(sys.ContestedAmount * 100, 2))}%", inline=True)
+		advFact = sys.AdvantageFactionID1
+		netAdvantage = (sys.AdvantageTerrainAmount1 + sys.AdvantageDynamicAmount1) - (sys.AdvantageTerrainAmount2 + sys.AdvantageDynamicAmount2)
+		if netAdvantage < 0:
+			advFact = sys.AdvantageFactionID2
+
+		embed.add_field(name=f"{sys.system.name}", value=f"Contested - {round(sys.ContestedAmount * 100, 2)}%\nAdvatage {abs(netAdvantage)}% - {advFact.name}", inline=True)
 
 	return embed

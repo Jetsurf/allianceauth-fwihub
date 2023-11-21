@@ -2,7 +2,7 @@ from django.contrib import admin
 from allianceauth.services.hooks import get_extension_logger
 from eveuniverse.models import EveFaction, EveRegion, EveSolarSystem
 
-from fwsystems.models import System, Webhook
+from fwsystems.models import Faction, System, Webhook
 
 #from .admin_helpers import list_2_html_w_tooltips
 
@@ -15,6 +15,16 @@ class SystemConfigAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "System":
             kwargs['queryset'] = System.objects.all()
+
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+@admin.register(Faction)
+class SystemConfigAdmin(admin.ModelAdmin):
+    list_display = ["faction"]
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "System":
+            kwargs['queryset'] = Faction.objects.all()
 
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
