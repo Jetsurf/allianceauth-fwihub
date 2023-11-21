@@ -27,20 +27,51 @@ def systemviewer(request) -> HttpResponse:
 		contest_entries = SystemContest.objects.filter(system_id=system_id)
 		time_data = []
 		contest_data = []
-		advantage_data = []
+		advantage_data1 = []
+		advantage_data2 = []
+		faction1 = contest_entries[0].AdvantageFactionID1.name
+		faction2 = contest_entries[0].AdvantageFactionID2.name
 		title = system.name
 
+		if contest_entries[0].AdvantageFactionID1.id == 500004:
+			color1 = "green"
+			color2 = "blue"
+		elif contest_entries[0].AdvantageFactionID1.id == 500001:
+			color1 = "blue"
+			color2 = "green"
+		elif contest_entries[0].AdvantageFactionID1.id == 500002:
+			color1 = "red"
+			color2 = "yellow"
+		elif contest_entries[0].AdvantageFactionID1.id == 500003:
+			color1 = "yellow"
+			color2 = "red"
+		else:
+			color1 = "purple"
+			color2 = "orange"
+
 		for entry in contest_entries:
+			time_data.append(entry.created.strftime("%m-%d %H:%M"))
 			contest_data.append(round(entry.ContestedAmount * 100, 2))
-			advantage_data.append({"x" : int(entry.created.timestamp())*1000, "y" : entry.AdvantageTerrainAmount1})
+			netAdvantage = (entry.AdvantageTerrainAmount1 + entry.AdvantageDynamicAmount1) - (entry.AdvantageTerrainAmount2 + entry.AdvantageDynamicAmount2)
+			if netAdvantage > 0:
+				advantage_data1.append(abs(netAdvantage))
+				advantage_data2.append(0)
+			else:
+				advantage_data1.append(0)
+				advantage_data2.append(abs(netAdvantage))
 
 		render_items = {
 			"systems" : systems,
 			"system" : system,
 			"title" : title,
 			"contestAmount": contest_data,
-			"advantageAmount": advantage_data,
-			
+			"advantageAmount1" : advantage_data1,
+			"advantageAmount2" : advantage_data2,
+			"color1" : color1,
+			"color2" : color2,
+			"faction1" : faction1,
+			"faction2" : faction2,
+			"timeData" : time_data,
 			"contest_entries" : contest_entries
 		}
 	else:

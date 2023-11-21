@@ -41,32 +41,40 @@
 						toolTip: {
 							shared: true
 						},
-						scales: {
-							xAxes: {
-								type: 'time'
+						scales : {
+							x: {
+							    type: 'time',
+							    ticks: {
+							        autoSkip: true,
+							        maxTicksLimit: 5
+   							    }
 							}
 						}
 					},
 
 					data: {
+						labels: {{timeData|safe}},
 						datasets: [{
 							steppedLine: true,
-							xValueType: "dateTime",
-							xValueFormatString: "MMM-DD",
 							label: "Contest Amount",
 							lineThickness: 1,
 							borderColor: "red",
 							data: {{contestAmount|safe}},
 						},{
 							steppedLine: true,
-							xValueType: "dateTime",
-							xValueFormatString: "MMM-DD",
-							label: "Advantage Amount",
+							label: "{{faction1|safe}} Advantage",
 							axisYType: "secondary",
 							lineThickness: 1,
-							borderColor: "blue",
-							data: {{advantageAmount|safe}},
-						}]
+							borderColor: "{{color1}}",
+							data: {{advantageAmount1|safe}},
+						},{
+                                                        steppedLine: true,
+                                                        label: "{{faction2|safe}} Advantage",
+                                                        axisYType: "secondary",
+                                                        lineThickness: 1,
+                                                        borderColor: "{{color2}}",
+                                                        data: {{advantageAmount2|safe}},
+                                                }]
 					}
 				});
 				chart.render();

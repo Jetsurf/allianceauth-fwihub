@@ -21,6 +21,8 @@ def create_contest_embed(systems: list):
 		if netAdvantage < 0:
 			advFact = sys.AdvantageFactionID2
 
-		embed.add_field(name=f"{sys.system.name}", value=f"Contested - {round(sys.ContestedAmount * 100, 2)}%\nAdvatage {abs(netAdvantage)}% - {advFact.name}", inline=True)
-
+		if netAdvantage < 0:
+			embed.add_field(name=f"{sys.system.name}", value=f"{round(sys.ContestedAmount * 100, 2)}%\nAdv - {abs(netAdvantage)}% - {advFact.name}", inline=True)
+		else:
+			embed.add_field(name=f"{sys.system.name}", value=f"{round(sys.ContestedAmount * 100, 2)}%\nAdv - {abs(netAdvantage)}%", inline=True)
 	return embed
