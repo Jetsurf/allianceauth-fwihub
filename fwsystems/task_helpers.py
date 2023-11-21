@@ -17,12 +17,14 @@ def create_contest_embed(systems: list):
 	embed.colour = FWSYSTEMS_WARNING_COLOR
 	for sys in systems:
 		advFact = sys.AdvantageFactionID1
+
 		netAdvantage = (sys.AdvantageTerrainAmount1 + sys.AdvantageDynamicAmount1) - (sys.AdvantageTerrainAmount2 + sys.AdvantageDynamicAmount2)
 		if netAdvantage < 0:
 			advFact = sys.AdvantageFactionID2
-
-		if netAdvantage < 0:
-			embed.add_field(name=f"{sys.system.name}", value=f"{round(sys.ContestedAmount * 100, 2)}%\nAdv - {abs(netAdvantage)}% - {advFact.name}", inline=True)
+			embed.add_field(name=f"{sys.system.name}", value=f"{round(sys.ContestedAmount * 100, 2)}%\nAdv : {abs(netAdvantage)}% : {advFact.name[:3]}", inline=True)
+		elif netAdvantage > 0:
+			embed.add_field(name=f"{sys.system.name}", value=f"{round(sys.ContestedAmount * 100, 2)}%\nAdv : {abs(netAdvantage)}% : {advFact.name[:3]}", inline=True)
 		else:
-			embed.add_field(name=f"{sys.system.name}", value=f"{round(sys.ContestedAmount * 100, 2)}%\nAdv - {abs(netAdvantage)}%", inline=True)
+			embed.add_field(name=f"{sys.system.name}", value=f"{round(sys.ContestedAmount * 100, 2)}%\nAdv : {abs(netAdvantage)}%", inline = True)
+
 	return embed

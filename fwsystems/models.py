@@ -12,24 +12,17 @@ from django.utils.translation import gettext_lazy as _
 
 from allianceauth.services.hooks import get_extension_logger
 
-class Faction(models.Model):
-	faction = models.ForeignKey( EveFaction,
-		verbose_name=_("Faction"),
-		on_delete=models.CASCADE
-	)
-
-	def save(self, *args, **kwargs):
-		if not self.pk and Faction.objects.exists():
-			raise ValidationError("Only one webhook is allowed currently")
-		return super(Faction, self).save(*args, **kwargs)
-
 class System(models.Model):
+
 	system = models.ForeignKey( EveSolarSystem,
 		verbose_name=_("System"),
 		on_delete=models.CASCADE
 	)
 
 	created = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return self.system.name
 
 class SystemContest(models.Model):
 	system = models.ForeignKey(EveSolarSystem,

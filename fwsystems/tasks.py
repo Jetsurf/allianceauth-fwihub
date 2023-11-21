@@ -11,7 +11,7 @@ from fwsystems.models import Faction, System, SystemContest, Webhook
 from fwsystems.providers import get_warzone
 from fwsystems.task_helpers import create_contest_embed
 
-from fwsystems.app_settings import ( FWSYSTEMS_LOG_ALL_SYSTEMS )
+from fwsystems.app_settings import ( FWSYSTEMS_LOG_ALL_SYSTEMS, FWSYSTEMS_ALERT_THRESHOLD )
 
 from django.contrib.auth.models import User
 from django.apps import apps
@@ -75,12 +75,10 @@ def send_fw_notifications():
 	for sys in systems:
 		entry = SystemContest.objects.filter(system_id=sys.system_id).latest("created")
 
-		if entry.ContestedAmount * 100 > 80:
+		if entry.ContestedAmount * 100 > FWSYSTEMS_ALERT_THRESHOLD:
 				highContest.append(entry)
 
 	if len(highContest) > 0:
 		hook = Webhook.objects.all()[0]
 		if hook.enabled:
 			hook.send_embed(create_contest_embed(highContest))
-		
-		

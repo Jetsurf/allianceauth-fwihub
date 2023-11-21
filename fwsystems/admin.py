@@ -18,16 +18,6 @@ class SystemConfigAdmin(admin.ModelAdmin):
 
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
-@admin.register(Faction)
-class SystemConfigAdmin(admin.ModelAdmin):
-    list_display = ["faction"]
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "System":
-            kwargs['queryset'] = Faction.objects.all()
-
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
 @admin.register(Webhook)
 class WebhookAdmin(admin.ModelAdmin):
     list_display = ("Name", )
