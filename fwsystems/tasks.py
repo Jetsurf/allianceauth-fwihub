@@ -33,6 +33,9 @@ def update_fw_esi():
 	if not FWSYSTEMS_LOG_ALL_SYSTEMS:
 		for system in systems:	
 			entry = next((item for item in data if item['solarsystemID'] == system.system.id))
+			
+			if entry['contetedStatus'] is "Uncontested":
+				continue
 
 			sys_entry = SystemContest(
 				system_id=entry['solarsystemID'],
