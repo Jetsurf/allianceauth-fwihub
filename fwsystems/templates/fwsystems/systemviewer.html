@@ -42,13 +42,30 @@
 							shared: true
 						},
 						scales : {
-							x: {
-							    type: 'time',
-							    ticks: {
-							        autoSkip: true,
-							        maxTicksLimit: 5
-   							    }
-							}
+							yAxes : [
+								{
+									id : 'y',
+									display : true,
+									scaleLabel : {
+										labelString : "Contest %",
+										display : true,
+										fontColor : 'red'
+									},
+									type : 'linear',
+									position : 'left'
+								},
+								{
+									id : 'y1',
+									display : true,
+									scaleLabel : {
+										labelString : "Advantage %",
+										display : true,
+										fontColor : '{{color1}}'
+									},
+									type : 'linear',
+									position : 'right'
+								}
+							]
 						}
 					},
 
@@ -59,6 +76,7 @@
 							label: "Contest Amount",
 							lineThickness: 1,
 							borderColor: "red",
+							yAxisID : 'y',
 							data: {{contestAmount|safe}},
 						},{
 							steppedLine: true,
@@ -66,15 +84,17 @@
 							axisYType: "secondary",
 							lineThickness: 1,
 							borderColor: "{{color1}}",
+							yAxisID : 'y1',
 							data: {{advantageAmount1|safe}},
 						},{
-                                                        steppedLine: true,
-                                                        label: "{{faction2|safe}} Advantage",
-                                                        axisYType: "secondary",
-                                                        lineThickness: 1,
-                                                        borderColor: "{{color2}}",
-                                                        data: {{advantageAmount2|safe}},
-                                                }]
+							steppedLine: true,
+							label: "{{faction2|safe}} Advantage",
+							axisYType: "secondary",
+							lineThickness: 1,
+							borderColor: "{{color2}}",
+							yAxisID : 'y1',
+							data: {{advantageAmount2|safe}},
+						}]
 					}
 				});
 				chart.render();
