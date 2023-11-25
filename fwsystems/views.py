@@ -16,14 +16,14 @@ from django.contrib.auth.decorators import login_required, permission_required
 @permission_required("fwsystems.can_view_app")
 def systemviewer(request) -> HttpResponse:
 	systems = System.objects.all()
-	system_id = request.GET.get('system_id', None)
+	system_id = request.GET.get('system_id', 0)
 	#chart = request.GET.get("chartcontainer", None)
 	try:
 		system, system_fetched = EveSolarSystem.objects.get_or_create_esi(id=system_id)
 	except:
-		system = None
+		system = 0
 
-	if system_id != None:
+	if int(system_id) > 0:
 		contest_entries = SystemContest.objects.filter(system_id=system_id)
 		time_data = []
 		contest_data = []
@@ -64,6 +64,7 @@ def systemviewer(request) -> HttpResponse:
 			"systems" : systems,
 			"system" : system,
 			"title" : title,
+			"owner" : contest_entries[len(contest_entries)-1].OccupierFactionID.name,
 			"contestAmount": contest_data,
 			"advantageAmount1" : advantage_data1,
 			"advantageAmount2" : advantage_data2,

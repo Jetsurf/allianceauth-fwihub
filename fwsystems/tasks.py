@@ -18,13 +18,6 @@ from django.apps import apps
 
 logger = get_extension_logger(__name__)
 
-def discord_bot_active():
-    return apps.is_installed('aadiscordbot')
-
-@hooks.register('discord_cogs_hook')
-def register_cogs():
-    return ["fwsystems.cogs.grapher"]
-
 @shared_task
 def update_fw_esi():
 	systems = System.objects.all()
@@ -33,7 +26,7 @@ def update_fw_esi():
 	if not FWSYSTEMS_LOG_ALL_SYSTEMS:
 		for system in systems:	
 			entry = next((item for item in data if item['solarsystemID'] == system.system.id))
-			
+
 			if entry['contetedStatus'] is "Uncontested":
 				continue
 

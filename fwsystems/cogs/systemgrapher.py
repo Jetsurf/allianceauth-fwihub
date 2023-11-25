@@ -1,3 +1,5 @@
+import logging
+
 from discord import Embed, User, option
 from discord.ext import commands
 
@@ -9,9 +11,9 @@ class SystemGrapher(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.slash_command(name="graph", guild_ids=[int(settings.DISCORD_GUILD_ID)])
+	@commands.slash_command(name="graph")
 	async def graph_system(self, ctx):
-		ctx.respond("testing for now!")
+		await ctx.respond("testing for now!")
 
-	def setup(bot):
-    	bot.add_cog(SystemGrapher(bot))
+def setup(bot):
+	bot.add_cog(SystemGrapher(bot))

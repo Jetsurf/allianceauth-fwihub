@@ -24,4 +24,8 @@ def register_menu() -> FwSystemsSystemsViewer:
 def register_urls() -> UrlHook:
 	return UrlHook(urls, "fwsystems", r"^fwsystems/")
 
+@hooks.register('discord_cogs_hook')
+def register_cogs():
+    return ["fwsystems.cogs.systemgrapher"]
+
 	

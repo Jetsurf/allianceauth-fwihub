@@ -36,7 +36,7 @@
 						animationEnabled: true,
 						title:{
 							display: true,
-							text: "{{ title|safe }}"
+							text: "{{ title|safe }} - {{ owner|safe }} Occupied"
 						},
 						toolTip: {
 							shared: true
@@ -49,6 +49,7 @@
 									scaleLabel : {
 										labelString : "Contest %",
 										display : true,
+										fontStyle: "bold",
 										fontColor : 'red'
 									},
 									type : 'linear',
@@ -60,6 +61,7 @@
 									scaleLabel : {
 										labelString : "Advantage %",
 										display : true,
+										fontStyle: "bold",
 										fontColor : '{{color1}}'
 									},
 									type : 'linear',
@@ -75,6 +77,8 @@
 							steppedLine: true,
 							label: "Contest Amount",
 							lineThickness: 1,
+							pointRadius: 0,
+							fill: false,
 							borderColor: "red",
 							yAxisID : 'y',
 							data: {{contestAmount|safe}},
@@ -83,6 +87,8 @@
 							label: "{{faction1|safe}} Advantage",
 							axisYType: "secondary",
 							lineThickness: 1,
+							pointRadius: 0,
+							fill: false,
 							borderColor: "{{color1}}",
 							yAxisID : 'y1',
 							data: {{advantageAmount1|safe}},
@@ -91,6 +97,8 @@
 							label: "{{faction2|safe}} Advantage",
 							axisYType: "secondary",
 							lineThickness: 1,
+							pointRadius: 0,
+							fill: false,
 							borderColor: "{{color2}}",
 							yAxisID : 'y1',
 							data: {{advantageAmount2|safe}},
