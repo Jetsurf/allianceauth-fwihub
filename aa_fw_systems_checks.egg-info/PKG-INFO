@@ -29,6 +29,8 @@ Requires-Dist: allianceauth<4.0.0,>=3.0.0
 Requires-Dist: django-eveuniverse
 Requires-Dist: django-solo<3.0.0,>=2.0.0
 Requires-Dist: py-cord<3.0.0,>=2.0.0
+Requires-Dist: django-chartjs>=2.3.0
+Requires-Dist: matplotlib>=3.8.2
 
 #Alliance Auth FW System Checks
 
