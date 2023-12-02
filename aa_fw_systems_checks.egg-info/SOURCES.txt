@@ -16,4 +16,5 @@ fwsystems/providers.py
 fwsystems/task_helpers.py
 fwsystems/tasks.py
 fwsystems/urls.py
+fwsystems/view_helpers.py
 fwsystems/views.py

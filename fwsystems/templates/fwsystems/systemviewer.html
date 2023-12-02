@@ -23,92 +23,18 @@
 					{% include "fwsystems/systemviewer/system_selector.html" %}
 				</ul>
 			</div>
+			<div class="collapse navbar-collapse" id="systemviewer-navbar-collapse-2">
+				<ul class="navbar-form navbar-center">
+					{% include "fwsystems/systemviewer/days_picker.html" %}
+				</ul>
+			</div>
 		</nav>
 	<head>
+	{% if system_id != 0 %}
 	<body>
-		<script src="{% static 'js/Chart.min.js' %}"></script>
-		<canvas id="chartContainer" style="width: 100%; height: 360px;"></canvas>
-		<script>
-			window.onload = function () {
-				var chart = new Chart("chartContainer", {
-					type: 'line',
-					options: {
-						animationEnabled: true,
-						title:{
-							display: true,
-							text: "{{ title|safe }} - {{ owner|safe }} Occupied"
-						},
-						toolTip: {
-							shared: true
-						},
-						scales : {
-							yAxes : [
-								{
-									id : 'y',
-									display : true,
-									scaleLabel : {
-										labelString : "Contest %",
-										display : true,
-										fontStyle: "bold",
-										fontColor : '{{colorcontest}}'
-									},
-									type : 'linear',
-									position : 'left'
-								},
-								{
-									id : 'y1',
-									display : true,
-									scaleLabel : {
-										labelString : "Advantage %",
-										display : true,
-										fontStyle: "bold",
-										fontColor : '{{color1}}'
-									},
-									type : 'linear',
-									position : 'right'
-								}
-							]
-						}
-					},
-
-					data: {
-						labels: {{timeData|safe}},
-						datasets: [{
-							steppedLine: true,
-							label: "Contest Amount",
-							lineThickness: 1,
-							pointRadius: 0,
-							fill: false,
-							borderColor: "{{colorcontest}}",
-							yAxisID : 'y',
-							data: {{contestAmount|safe}},
-						},{
-							steppedLine: true,
-							label: "{{faction1|safe}} Advantage",
-							axisYType: "secondary",
-							lineThickness: 1,
-							pointRadius: 0,
-							fill: false,
-							borderColor: "{{color1}}",
-							yAxisID : 'y1',
-							data: {{advantageAmount1|safe}},
-						},{
-							steppedLine: true,
-							label: "{{faction2|safe}} Advantage",
-							axisYType: "secondary",
-							lineThickness: 1,
-							pointRadius: 0,
-							fill: false,
-							borderColor: "{{color2}}",
-							yAxisID : 'y1',
-							data: {{advantageAmount2|safe}},
-						}]
-					}
-				});
-				chart.render();
-			}
-		</script>
+		{% include "fwsystems/systemviewer/system_grapher.html" %}
 	</body>
+	{% endif %}
 	</head>
 	</div>
 
