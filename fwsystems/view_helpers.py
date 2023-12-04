@@ -41,10 +41,11 @@ def get_contest_entries_sorted(system_id, days, retDateTime=False):
 		for entry in contest_entries:
 			if retDateTime:
 				time_data.append(entry.created)
+				contest_data.append(round(entry.ContestedAmount, 2))
 			else:
 				time_data.append(entry.created.strftime("%m-%d %H:%M"))
-
-			contest_data.append(entry.ContestedAmount)
+				contest_data.append(round(entry.ContestedAmount * 100, 2))
+			
 			netAdvantage = (entry.AdvantageTerrainAmount1 + entry.AdvantageDynamicAmount1) - (entry.AdvantageTerrainAmount2 + entry.AdvantageDynamicAmount2)
 			if netAdvantage > 0:
 				advantage_data1.append(netAdvantage)
