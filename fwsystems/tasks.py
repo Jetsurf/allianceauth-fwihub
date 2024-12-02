@@ -30,6 +30,11 @@ def update_fw_esi():
 			if entry['contetedStatus'] is "Uncontested":
 				continue
 
+			for i in range(len(entry['advantage'])):
+				if entry['advantage'][i]['factionID'] == 500010 or entry['advantage'][i]['factionID'] == 500011:
+					entry['advantage'].pop(i)
+					break
+
 			sys_entry = SystemContest(
 				system_id=entry['solarsystemID'],
 				OwnerFactionID = EveFaction.objects.update_or_create_esi(id=entry['ownerFaction'])[0],
@@ -47,6 +52,11 @@ def update_fw_esi():
 			sys_entry.save()
 	else:
 		for entry in data:
+			for i in range(len(entry['advantage'])):
+				if entry['advantage'][i]['factionID'] == 500010 or entry['advantage'][i]['factionID'] == 500011:
+					entry['advantage'].pop(i)
+					break
+
 			sys_entry = SystemContest(
 				system_id=entry['solarsystemID'],
 				OwnerFactionID = EveFaction.objects.update_or_create_esi(id=entry['ownerFaction'])[0],
